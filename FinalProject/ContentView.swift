@@ -12,14 +12,11 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Habits Tracker")
-            NavigationView {
-                VStack {
-                    HabitTableViewController()
-                    NavigationLink("Add Habit to Track") {
-                        NewHabitViewController(name: "Habit 1")
-                    }
-                }
-            }
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.red)
+                .padding(.bottom, 20)
+            HabitTableViewController(habitModel: HabitModel())
         }
         .padding()
     }

@@ -21,16 +21,14 @@ struct DayOfWeekToggle: View {
 
 struct NewHabitViewController: View {
     
+    @ObservedObject var habitModel: HabitModel
     @State var name : String;
     @State private var selectedDays = Array(repeating: false, count: 7)
     let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
     func saveHabit() {
         let newHabit = Habit(name: name, days: selectedDays)
-        HabitTableViewController.habits.append(newHabit)
-        // Reset selectedDays and habitName for next habit entry
-        selectedDays = Array(repeating: false, count: 7)
-        name = ""
+                habitModel.habits.append(newHabit)
     }
     
     var body: some View {
@@ -57,6 +55,4 @@ struct NewHabitViewController: View {
     
 }
 
-#Preview {
-    NewHabitViewController(name: "name")
-}
+
