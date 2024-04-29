@@ -24,11 +24,13 @@ struct NewHabitViewController: View {
     @ObservedObject var habitModel: HabitModel
     @State var name : String;
     @State private var selectedDays = Array(repeating: false, count: 7)
+    @State private var showingPopup = false
     let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
     func saveHabit() {
         let newHabit = Habit(name: name, days: selectedDays)
                 habitModel.habits.append(newHabit)
+        showingPopup = true
     }
     
     var body: some View {
@@ -50,6 +52,14 @@ struct NewHabitViewController: View {
             Button("Save") {
                 saveHabit()
             }
+        }
+        .alert(isPresented: $showingPopup) {
+            Alert(
+                title: Text("Habit Manager"),
+                message: Text("Habit Saved Successfully!"),
+                primaryButton: .default(Text("OK")),
+                secondaryButton: .cancel()
+            )
         }
     }
     

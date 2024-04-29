@@ -77,23 +77,25 @@ struct DayOfWeekVToggle: View {
     let dayIndex: Int
     @Binding var isSelected: Bool
     let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    @State var button = false;
     
     var body: some View {
         VStack {
             Text(daysOfWeek[dayIndex].prefix(3)) // Display only the first 3 characters of the day name
             
-            Button(action: {
-                isSelected.toggle()
-            }) {
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.primary, lineWidth: 2)
+            RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.blue, lineWidth: 2)
                     .frame(width: 20, height: 20)
-                    .foregroundColor(isSelected ? Color.primary : Color.clear)
-            }
+                    .foregroundColor(button ? Color.red : Color.clear)
+                    .onTapGesture {
+                        button.toggle()
+                    }
+            
             .buttonStyle(PlainButtonStyle())
         }
     }
 }
+
 
 
 
